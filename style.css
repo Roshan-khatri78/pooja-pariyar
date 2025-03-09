@@ -641,7 +641,8 @@ footer {
     }
 
     .nav-links li {
-        opacity: 0;
+        opacity: 1 !important;
+        animation: none;
     }
 
     .burger {
