@@ -334,8 +334,8 @@ nav {
 .hero-image::before {
     content: '';
     position: absolute;
-    width: 350px;
-    height: 350px;
+    width: 500px; /* increased from 350px */
+    height: 500px; /* increased from 350px */
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
@@ -345,8 +345,8 @@ nav {
 }
 
 .image-container {
-    width: 280px;
-    height: 280px;
+    width: 400px;  /* increased from 280px */
+    height: 400px; /* increased from 280px */
     border-radius: 50%;
     overflow: hidden;
     margin: 0 auto;
@@ -372,7 +372,6 @@ nav {
     filter: grayscale(0%) brightness(100%);
     transform: scale(1.05);
 }
-
 /* === SLOW GLOW FOR "POOJA PARIYAR" === */
 .highlight {
     color: var(--primary-color);
