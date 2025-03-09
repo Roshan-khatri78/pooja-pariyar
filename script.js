@@ -18,7 +18,7 @@ document.addEventListener('DOMContentLoaded', function() {
     burger.addEventListener('click', () => {
         nav.classList.toggle('nav-active');
         
-        // Animate links
+        // Animate links (if needed, though mobile opacity is now forced)
         navLinkItems.forEach((link, index) => {
             if (link.style.animation) {
                 link.style.animation = '';
