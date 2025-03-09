@@ -1,4 +1,3 @@
-// Initialize when DOM is fully loaded
 document.addEventListener('DOMContentLoaded', function() {
     // Element selections
     const navLinks = document.querySelectorAll('.nav-links a');
@@ -41,7 +40,6 @@ document.addEventListener('DOMContentLoaded', function() {
             if (nav.classList.contains('nav-active')) {
                 nav.classList.remove('nav-active');
                 burger.classList.remove('toggle');
-                
                 navLinkItems.forEach(link => {
                     link.style.animation = '';
                 });
@@ -75,9 +73,9 @@ document.addEventListener('DOMContentLoaded', function() {
         
         // Animate elements when they come into view
         animateOnScroll();
-    });
+    }, { passive: true });
 
-    // Portfolio filtering (only if you have portfolio items)
+    // Portfolio filtering (if you have portfolio items)
     portfolioFilters.forEach(filter => {
         filter.addEventListener('click', function() {
             // Update active filter
@@ -128,17 +126,13 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Helper Functions
     function updateActiveNavLink(scrollPos) {
-        // Determine which section is currently in view
         sections.forEach(section => {
             const sectionTop = section.offsetTop - 100;
             const sectionHeight = section.offsetHeight;
             const sectionId = section.getAttribute('id');
             
             if (scrollPos >= sectionTop && scrollPos < sectionTop + sectionHeight) {
-                // Remove active class from all links
                 navLinks.forEach(link => link.classList.remove('active'));
-                
-                // Add active class to corresponding link
                 document.querySelector(`.nav-links a[href="#${sectionId}"]`)?.classList.add('active');
             }
         });
@@ -194,12 +188,10 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Add hover effect to interactive elements
     const interactiveElements = document.querySelectorAll('a, button, .service-card, .portfolio-item, .timeline-content');
-    
     interactiveElements.forEach(element => {
         element.addEventListener('mouseenter', () => {
             cursorGlow.classList.add('cursor-hover');
         });
-        
         element.addEventListener('mouseleave', () => {
             cursorGlow.classList.remove('cursor-hover');
         });
@@ -233,7 +225,6 @@ document.addEventListener('DOMContentLoaded', function() {
     modalContainer.classList.add('portfolio-modal-container');
     document.body.appendChild(modalContainer);
 
-    // Add modal HTML structure
     modalContainer.innerHTML = `
         <div class="portfolio-modal">
             <div class="modal-close">&times;</div>
@@ -249,7 +240,6 @@ document.addEventListener('DOMContentLoaded', function() {
         </div>
     `;
 
-    // Add modal styles
     const modalStyle = document.createElement('style');
     modalStyle.textContent = `
         .portfolio-modal-container {
@@ -362,7 +352,6 @@ document.addEventListener('DOMContentLoaded', function() {
     `;
     document.head.appendChild(modalStyle);
 
-    // Modal functionality
     const modal = document.querySelector('.portfolio-modal-container');
     const modalClose = document.querySelector('.modal-close');
     
@@ -375,28 +364,24 @@ document.addEventListener('DOMContentLoaded', function() {
             const description = this.getAttribute('data-description') || 'No description available.';
             const projectLink = this.getAttribute('data-link') || '#';
             
-            // Set modal content
             document.querySelector('.modal-title').textContent = title;
             document.querySelector('.modal-category').textContent = category;
             document.querySelector('.modal-description').textContent = description;
             document.querySelector('.modal-link').href = projectLink;
-            
-            // Set image
             document.querySelector('.modal-image-container').innerHTML = `<img src="${imageSrc}" alt="${title}">`;
             
-            // Show modal
             modal.classList.add('active');
-            document.body.style.overflow = 'hidden'; // Prevent scrolling when modal is open
+            document.body.style.overflow = 'hidden';
         });
     });
     
     // Close modal when clicking close button
     modalClose.addEventListener('click', () => {
         modal.classList.remove('active');
-        document.body.style.overflow = ''; // Restore scrolling
+        document.body.style.overflow = '';
     });
     
-    // Close modal when clicking outside of it
+    // Close modal when clicking outside
     modal.addEventListener('click', (e) => {
         if (e.target === modal) {
             modal.classList.remove('active');
@@ -418,7 +403,6 @@ document.addEventListener('DOMContentLoaded', function() {
     backToTopBtn.innerHTML = '<i class="fas fa-arrow-up"></i>';
     document.body.appendChild(backToTopBtn);
     
-    // Back to top button styles
     const backToTopStyle = document.createElement('style');
     backToTopStyle.textContent = `
         .back-to-top {
@@ -453,15 +437,15 @@ document.addEventListener('DOMContentLoaded', function() {
     `;
     document.head.appendChild(backToTopStyle);
     
-    // Show/hide back-to-top button based on scroll position
+    // Show/hide back-to-top button
     window.addEventListener('scroll', () => {
         if (window.scrollY > 300) {
             backToTopBtn.classList.add('visible');
         } else {
             backToTopBtn.classList.remove('visible');
         }
-    });
-    
+    }, { passive: true });
+
     // Scroll to top when button is clicked
     backToTopBtn.addEventListener('click', () => {
         window.scrollTo({
@@ -469,8 +453,8 @@ document.addEventListener('DOMContentLoaded', function() {
             behavior: 'smooth'
         });
     });
-    
-    // Add lazy loading for images
+
+    // Lazy loading for images with data-src
     const images = document.querySelectorAll('img[data-src]');
     const lazyLoadObserver = new IntersectionObserver((entries, observer) => {
         entries.forEach(entry => {
@@ -496,7 +480,7 @@ document.addEventListener('DOMContentLoaded', function() {
       const offset = (rect.top + rect.height / 2) - (window.innerHeight / 2);
       timeline.style.transform = `translateY(${-offset * 0.2}px)`;
     }
-    window.addEventListener('scroll', handleTimelineScroll);
+    window.addEventListener('scroll', handleTimelineScroll, { passive: true });
 
     // Social media linking functionality for WhatsApp, Instagram, and Gmail
     const socialIcons = document.querySelectorAll('.social-icon');
