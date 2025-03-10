@@ -649,7 +649,6 @@ footer {
         display: block;
     }
 
-    /* Updated selector for mobile navigation active state */
     .nav-links.nav-active {
         transform: translateX(0%);
     }
