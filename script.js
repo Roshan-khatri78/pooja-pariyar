@@ -488,23 +488,38 @@ document.addEventListener('DOMContentLoaded', function() {
         icon.addEventListener('click', function(e) {
             e.preventDefault();
             const platform = this.getAttribute('data-platform');
+            const isMobile = /Android|iPhone|iPad|iPod|Windows Phone/i.test(navigator.userAgent);
             let url;
             
             switch(platform) {
                 case 'gmail':
-                    url = 'https://mail.google.com/';
+                    if (isMobile) {
+                      // Open mail client on mobile
+                      url = 'mailto:pariyarpooja730@gmail.com';
+                    } else {
+                      // Desktop fallback
+                      url = 'https://mail.google.com/';
+                    }
                     break;
                 case 'whatsapp':
                     const phoneNumber = '+977982209162';
-                    if (/Android|iPhone|iPad|iPod|Windows Phone/i.test(navigator.userAgent)) {
+                    if (isMobile) {
+                        // Open WhatsApp app on mobile
                         url = `whatsapp://send?phone=${phoneNumber}`;
                     } else {
+                        // Desktop fallback
                         url = `https://web.whatsapp.com/send?phone=${phoneNumber}`;
                     }
                     break;
                 case 'instagram':
                     const instaUsername = 'pariyarpooja7302024';
-                    url = `https://www.instagram.com/${instaUsername}/`;
+                    if (isMobile) {
+                      // Open Instagram app if installed
+                      url = `instagram://user?username=${instaUsername}`;
+                    } else {
+                      // Desktop fallback
+                      url = `https://www.instagram.com/${instaUsername}/`;
+                    }
                     break;
                 default:
                     console.warn('Unknown social platform:', platform);
@@ -512,11 +527,13 @@ document.addEventListener('DOMContentLoaded', function() {
             }
             
             try {
+                // Attempt to open the custom URL/app
                 setTimeout(() => {
                     window.open(url, '_blank');
                 }, 100);
             } catch (error) {
                 console.error('Failed to open link:', error);
+                // Fallback to direct link
                 window.location.href = url;
             }
         });
