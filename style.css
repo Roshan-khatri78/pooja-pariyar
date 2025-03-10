@@ -702,3 +702,35 @@ footer {
     0% { opacity: 0; transform: translateY(15px); }
     100% { opacity: 1; transform: translateY(0); }
 }
+
+/* === SHOW REEL SECTION === */
+.showreel-section {
+    padding: 6rem 0;
+    background-color: var(--card-bg-color);
+    position: relative;
+    overflow: hidden;
+}
+
+.showreel-section .section-title {
+    color: var(--primary-color);
+}
+
+.video-container {
+    position: relative;
+    max-width: 800px;
+    margin: 0 auto;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 0 20px rgba(16, 231, 247, 0.3);
+}
+
+.video-container video {
+    width: 100%;
+    height: auto;
+    display: block;
+    transition: transform 0.5s ease;
+}
+
+.video-container:hover video {
+    transform: scale(1.05);
+}
