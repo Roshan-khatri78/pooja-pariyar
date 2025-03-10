@@ -711,6 +711,10 @@ footer {
     overflow: hidden;
 }
 
+.showreel-section .container {
+    text-align: center; /* Center heading & video */
+}
+
 .showreel-section .section-title {
     color: var(--primary-color);
 }
@@ -718,10 +722,24 @@ footer {
 .video-container {
     position: relative;
     max-width: 800px;
-    margin: 0 auto;
+    margin: 2rem auto; /* ensures it's centered */
     border-radius: 10px;
     overflow: hidden;
     box-shadow: 0 0 20px rgba(16, 231, 247, 0.3);
+}
+
+/* Subtle radial glow behind the video container */
+.video-container::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, rgba(16, 231, 247, 0.15), transparent 70%);
+    transform: translate(-50%, -50%);
+    z-index: -1;
+    filter: blur(80px);
 }
 
 .video-container video {
@@ -731,6 +749,7 @@ footer {
     transition: transform 0.5s ease;
 }
 
+/* Slight zoom on hover */
 .video-container:hover video {
-    transform: scale(1.05);
+    transform: scale(1.03);
 }
